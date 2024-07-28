@@ -1,4 +1,4 @@
-### Property Details model ###
+### Property model ###
 
 {
   "property_id": "string",
@@ -20,3 +20,9 @@
   "createdAt": "string",               # timestamp
   "updateAt": "string"                 # timestamp
 }
+
+
+# Descripción de la colección Property:
+# Una vez el usuario crea una cuenta, carga los datos de su propiedad.
+# Esta collección se vincula con las coleciones de "room_types" (tipos de habitaciones) y "rate_plans" (planes de tarifas).
+# Para entender mejor room_types y rate_plan ver las colecciones correspondientes
