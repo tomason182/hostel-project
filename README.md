@@ -1,6 +1,7 @@
 # hostel-project
 
 Diseño inicial de la estructura de la base de datos.
+Es IMPORTANTE seguir el orden detallado debajo al momento de leer los archivos, para entender mejor la estructura
 
 1. User Model: Almacena cada uno de los usuarios que se registran en la app
 2. Property Model: El usuario registrado crea una propiedad.
