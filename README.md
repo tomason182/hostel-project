@@ -8,5 +8,5 @@ Diseño inicial de la estructura de la base de datos.
 4. Room_types: Tipos de cuarto. Se vincula con Property.
 5. Rate_plan: NO DEFINIDO TODAVIA
 6. rate_and_availiability: Almacena las tarifas y disponibilidad (Hay que corregir)
-7. Guess: Almacena los pasajeros
+7. Guest: Almacena los pasajeros
 8. reservation: Destinada a los datos referidos a la reservas
