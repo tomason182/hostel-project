@@ -179,7 +179,6 @@ La colección "Product" combina el tipo de cuarto y el plan de tarifas para crea
   "rate_plan": "RatePlan[1..*]",
   "name": "string",
   "description": "string",
-  "custom_occupancy": "number",                     # La ocupación maxima viene establecida por "room_type", pero tal vez el usuario quiera modificar la cantidad de ocupantes indivdualmente.
-  "base_rate_per_night": "number"                   # Creo que el valor de la tarifa es mejor fijarlo en el calendario. Aca no va...
+  "custom_occupancy": "number",                     # La ocupación maxima viene establecida por "room_type", pero el usuario puede modificarla indivdualmente.
 }
 ```
