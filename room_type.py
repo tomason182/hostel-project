@@ -28,7 +28,7 @@
 # debe crear 4 tipos de cuartos.
 
 {
-  "room_type_id": "room_01",
+  "room_type_id": "room_type_01",
   "property_id":"60c72b5a9b1d8e3f4f8f85c76",
   "description": "Cuarto Privado con baño",
   "type": "Private",
@@ -38,8 +38,8 @@
 }
 
 {
-  "room_type_id": "room_02",
-  "property_id":"60c72b5a9b1d8e3f4f8f85c77",
+  "room_type_id": "room_type_02",
+  "property_id":"60c72b5a9b1d8e3f4f8f85c76",
   "description": "Cuarto Privado baño compartido",
   "type": "Private",
   "bathroom": "Share",
@@ -48,8 +48,8 @@
 }
 
 {
-  "room_type_id": "room_03",
-  "property_id":"60c72b5a9b1d8e3f4f8f85c78",
+  "room_type_id": "room_type_03",
+  "property_id":"60c72b5a9b1d8e3f4f8f85c76",
   "description": "Cuarto compartido mixto 6 camas",
   "type": "Dormitory",
   "bathroom": "Share",
@@ -58,8 +58,8 @@
 }
 
 {
-  "room_type_id": "room_04",
-  "property_id":"60c72b5a9b1d8e3f4f8f85c79",
+  "room_type_id": "room_type_04",
+  "property_id":"60c72b5a9b1d8e3f4f8f85c76",
   "description": "Cuarto compartido femenino 4 camas",
   "type": "Dormitory",
   "bathroom": "Share",
