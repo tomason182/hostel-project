@@ -2,7 +2,7 @@
 
 Diseño inicial de la estructura de la base de datos.
 
-El siguiente documento tiene como objetivo determinar la estructura y funcionamiento basico del CRM para hostels.
+El siguiente documento tiene como objetivo determinar la estructura y funcionamiento básico del CRM para hostels.
 
 Tabla de contenidos
 
@@ -26,9 +26,6 @@ Una vez el USUARIO se ha registrado, puede crear propiedades y otros USUARIOS pa
 Un USUARIO puede tener muchas PROPIEDADES y una PROPIEDAD varios USUARIOS.
 
 ```
-# @ Collection User
-# @ many-to-many:  User > Property
-
 {
   "user_id": ObjectId(),            # Identificador para el usuario
   "username": "string",             # usuario, posiblemente email (único)
@@ -54,9 +51,6 @@ De la misma forma, una propiedad puede tener uno o varios "rate_plan" y cada "ra
 La colección Property guarda un enlace al documento "User" del creador de la propiedad. De esa forma diferenciamos al USUARIO creador de los posibles USUARIOS a los que se le otorgen acceso a la misma.
 
 ```
-# @ Collection Property
-# @ One-to-Many: Property > room_type
-# @ One-to-Many: Property > rate_plan
 {
   "property_id": ObjectId(),
   "property_name": "string",
@@ -71,7 +65,7 @@ La colección Property guarda un enlace al documento "User" del creador de la pr
     "email": "string",
   },
 
-  "createdBy": User[1..*],               # user_id
+  "createdBy": User[1],                  # user_id
   "createdAt": "string",                 # timestamp
   "updateAt": "string"                   # timestamp
 }
@@ -85,15 +79,11 @@ Una propiedad tiene un solo access control, y un access control una sola propied
 Un access control tiene varios USUARIOS, un USUARIO podria tener varios access control. Su relacion es One-to-Many.
 
 ```
-# @ Coleccion Access_control
-# @ one-to-many User > Access_control
-# @ one-to-one Property > Access_control
-
 {
   "access_id": ObjectId(),
   "property_id": Property[1],                  # Id de la propiedad
-  "user_id": User[1..*],
-  "role": "string",                           # rol que se le asigna al usuario
+  "user_ids": ["User[1..*]"],
+  "role": "string",                            # rol que se le asigna al usuario
   "createAt": "string",
   "updateAt": "string"
 }
@@ -105,12 +95,9 @@ Una vez creada la propiedad el usuario agrega los tipos de cuartos que su propie
 Una Propiedad puede tener varios tipos de cuartos y un tipo de cuarto una sola propiedad. Su relación es One-to-Many
 
 ```
-# @ Collection Room-Type
-# @ One-to-Many: Property > Room-Type
-
 {
   "room_type_id": ObjectId(),             # Unique Id
-  "property_id": Property[1..*],              # Id unico de la propiedad
+  "property_id": Property[1..*],          # Id unico de la propiedad
   "description": "string",
   "type": "string",                       # Tipo de cuarto (ej. Privado, compartido)
   "bathroom": "string",                   # Baño privado o compartido
@@ -185,7 +172,7 @@ La colección "Product" combina el tipo de cuarto y el plan de tarifas para crea
 
 ## Rate & Availability
 
-Hasta este momento el usuario: agrego los datos de su propiedad, creo tipos de cuartos y planes de tarifas y se generaron
+Hasta este momento el usuario ha agregado los datos de su propiedad, creado tipos de cuartos y planes de tarifas y se han generaron
 todos los cuartos (editables) que contiene la propiedad.
 En este momento es necesario establecer la disponibilidad y tarifa diaria de cada cuarto.
 Por lo tanto esta Colección esta vinculada directamente con cada cuarto (Product).
@@ -194,17 +181,17 @@ De la colección "Product" obtenemos "custom_occupancy", lo que nos va a permiti
 
 ```
 {
-"rate_and_availability_id": "ObjectID()", # Id unica del documento
-"product_id": "Product[1]" # Vincula con la colección "Product"
+"rate_and_availability_id": "ObjectID()",                   # Id unica del documento
+"product_id": "Product[1]"                                  # Vincula con la colección "Product"
 "availability": [
-{
-"date": "string",
- "is_available": "boolean",
-"custom_rate": "number"
- }
+  {
+  "date": "string",
+  "is_available": "boolean",
+  "custom_rate": "number"
+  }
 ],
 "Created_At": "string",
- "Updated_At": "string"
+"Updated_At": "string"
 }
 ```
 
@@ -223,8 +210,11 @@ El modelo "Guest" esta abocado a los datos del pasajero que realiza la reserva, 
   "guess_id": "ObjectId",                 # Identificador del huesped
   "first_name": "string",                 # Datos relacionados con el huesped...
   "last_name": "string",
-  "email": "string",
-  "phone_number": "string",
+  "contact_info: {
+    "email": "string",
+    "phone_number": "string",
+  }
+
   "address": {
     "street": "string",
     "city": "string",
@@ -234,10 +224,6 @@ El modelo "Guest" esta abocado a los datos del pasajero que realiza la reserva, 
   "gender": "string",
   "nationality": "string",
   "passport_number": "string",
-  "loyalty_program": {                      # Programa de lealtad. No es útil ahora pero se lo puede tener en cuenta
-    "membership_number": "string",          # para el futuro, donde el viajero va sumando puntos si utiliza la pagina para
-    "points": "number",                     # reservar y asi optiene descuentos, promociones, etc
-  },
   "created_At": "string",
   "updated_At": "string"
 }
@@ -248,11 +234,13 @@ El modelo "Guest" esta abocado a los datos del pasajero que realiza la reserva, 
 ```
 {
   "reservation_id": "ObjectId()",               # Identificador unico de la reserva
-  "guess_id": "Guess[1..*]",                    # Identificador unico del huesped
-  "product_id": "Product[1..*],                 # Identificador unico de la habitación
+  "property_id": "Property[1]"                  # Vinculado con Property
+  "guess_id": "Guess[1]",                       # Vinculado con Guest
+  "product_id": "Product[1],                    # Vinculado con Product
+  "booking_source": "string"                    # Fuente de la reserva (ej. Booking.com)
   "check_in_date": "string",                    # Fecha de ingreso formato ISO 8601
   "check_out_date": "string",                   # Fecha de egreso formato ISO 8601
-  "number_of_guess": "number",                  # Numero total de huespedes
+  "number_of_guest": "number",                  # Numero total de huespedes
   "total_price": "number",                      # Importe total a pagar
   "currency": "string",                         # Moneda del importe total (ej., USD, EUR, ARS)
   "reservation_status": "string",               # Estado de la reserva (ej., confirmada, cancelada, etc)
