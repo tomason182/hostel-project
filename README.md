@@ -93,10 +93,27 @@ Un access control tiene varios USUARIOS, un USUARIO podria tener varios access c
 
 {
   "access_id": ObjectId(),
-  "property_id": ObjectId(),                    # Id de la propiedad
+  "property_id": ObjectId(),                  # Id de la propiedad
   "user_id": ObjectId(),
   "role": "string",                           # rol que se le asigna al usuario
   "createAt": "string",
   "updateAt": "string"
+}
+```
+
+Room Type
+
+Una vez creada la propiedad el usuario agrega los tipos de cuartos que su propiedad mantiene. Los tipos de cuartos se almacenan en la colección "Room Type". Los tipos de cuartos se vinculan exclusivamente con la propiedad.
+Una Propiedad puede tener varios tipos de cuartos y un tipo de cuarto una sola propiedad. Su relación es One-to-Many
+
+```
+{
+  "room_type_id": ObjectId(),             # Unique Id
+  "property_id": ObjectId(),              # Id unico de la propiedad
+  "description": "string",
+  "type": "string",                       # Tipo de cuarto (ej. Privado, compartido)
+  "bathroom": "string",                   # Baño privado o compartido
+  "maxOccupancy": "number",               # Ocupación maxima del cuarto
+  "inventory": "number"                   # Cantidad de cuartos del mismo tipo
 }
 ```
