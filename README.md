@@ -183,7 +183,7 @@ La colección "Product" combina el tipo de cuarto y el plan de tarifas para crea
 }
 ```
 
-# Rate & Availability
+## Rate & Availability
 
 Hasta este momento el usuario: agrego los datos de su propiedad, creo tipos de cuartos y planes de tarifas y se generaron
 todos los cuartos (editables) que contiene la propiedad.
@@ -192,6 +192,7 @@ Por lo tanto esta Colección esta vinculada directamente con cada cuarto (Produc
 La relación en este caso es One-to-One.
 De la colección "Product" obtenemos "custom_occupancy", lo que nos va a permitir determinar cuantas camas disponibles van quedando, (CUSTOM_OCCUPANCY - RESERVAS)
 
+```
 {
 "rate_and_availability_id": "ObjectID()", # Id unica del documento
 "product_id": "Product[1]" # Vincula con la colección "Product"
@@ -202,8 +203,9 @@ De la colección "Product" obtenemos "custom_occupancy", lo que nos va a permiti
 "custom_rate": "number"
  }
 ],
-"Created_At": "string",  
- "Updated_At": "string"  
+"Created_At": "string",
+ "Updated_At": "string"
 }
+```
 
 De "rate_plan" obtenemos la tarifa base, pero esta puede ser modificada por el usuario para un dia o un rango de dias especifico en esta colección.
