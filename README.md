@@ -71,7 +71,7 @@ La colección Property guarda un enlace al documento "User" del creador de la pr
     "email": "string",
   },
 
-  "createdBy": ObjectId(),               # user_id
+  "createdBy": User[1..*],               # user_id
   "createdAt": "string",                 # timestamp
   "updateAt": "string"                   # timestamp
 }
@@ -91,8 +91,8 @@ Un access control tiene varios USUARIOS, un USUARIO podria tener varios access c
 
 {
   "access_id": ObjectId(),
-  "property_id": ObjectId(),                  # Id de la propiedad
-  "user_id": ObjectId(),
+  "property_id": Property[1],                  # Id de la propiedad
+  "user_id": User[1..*],
   "role": "string",                           # rol que se le asigna al usuario
   "createAt": "string",
   "updateAt": "string"
@@ -110,7 +110,7 @@ Una Propiedad puede tener varios tipos de cuartos y un tipo de cuarto una sola p
 
 {
   "room_type_id": ObjectId(),             # Unique Id
-  "property_id": ObjectId(),              # Id unico de la propiedad
+  "property_id": Property[1..*],              # Id unico de la propiedad
   "description": "string",
   "type": "string",                       # Tipo de cuarto (ej. Privado, compartido)
   "bathroom": "string",                   # Baño privado o compartido
@@ -132,7 +132,7 @@ Se manejaran 4 tipos de planes de tarifa:
 ```
 {
   "rate_plan_id": ObjectId(),
-  "property_id": ObjectId(),
+  "property_id": Property[1..*],
   "plan_type": "enum",                            # Standard, LOS, OBP, etc
   "plan_name": "string",
   "conditions: {                                  # Condiciones especificas del plan
@@ -166,3 +166,20 @@ Se manejaran 4 tipos de planes de tarifa:
 
 (\*) Ejemplos: Con un nivel de ocupación superior al 80% el usuario pude establecer que la tarifa se incremente un 5% del precio standard. Por el contrario un nivel de ocupación del 20% la tarifa decrementa un 5%.
 (\*\*) Ejemplos: Un reserva individual $10 usd/noche, dos personas $18/noche, cuatro personas $15/noche.
+
+Product
+
+La colección "Product" combina el tipo de cuarto y el plan de tarifas para crear, junto con algunas restricciones, un producto (habitación) único de la propiedad.
+
+```
+{
+  "product_id": "ObjectID()",
+  "property_id": "Property[1]",
+  "room_type": "RoomType[1]",
+  "rate_plan": "RatePlan[1..*]",
+  "name": "string",
+  "description": "string",
+  "custom_occupancy": "number",                     # La ocupación maxima viene establecida por "room_type", pero tal vez el usuario quiera modificar la cantidad de ocupantes indivdualmente.
+  "base_rate_per_night": "number"                   # Creo que el valor de la tarifa es mejor fijarlo en el calendario. Aca no va...
+}
+```
