@@ -20,15 +20,17 @@ Tabla de contenidos
 
 User Model
 
-El primer paso que un USUARIO realiza en la aplicación es el registro. La colección "User" almacena los datos del registro del usuario.
-Una vez el USUARIO se ha registrado puede crear propiedades y otros USUARIOS para que gestionen su propiedad. Esta ultimá caracteristica se logra a traves del modelo "Access Control"
+El primer paso que un USUARIO realiza en la aplicación es el registro.
+La colección "User" almacena los datos del registro del usuario.
+Una vez el USUARIO se ha registrado, puede crear propiedades y otros USUARIOS para que gestionen su propiedad. Esta ultimá caracteristica se logra a traves del modelo "Access Control".
+Un USUARIO puede tener muchas PROPIEDADES y una PROPIEDAD varios USUARIOS.
 
 ```
 # @ Collection User
-# @ many-to-many User > Property
+# @ many-to-many:  User > Property
 
 {
-  "user_id": "string",              # Identificador para el usuario
+  "user_id": ObjectId(),            # Identificador para el usuario
   "username": "string",             # usuario, posiblemente email (único)
   "hashed_password": "string",      # Almacenamos el password hasheado
   "first_name": "string",
@@ -37,8 +39,39 @@ Una vez el USUARIO se ha registrado puede crear propiedades y otros USUARIOS par
     "email": "string",
     "phone_number": "string",
   },
-  "role": "string",                 # Role del usuario (ej., admin, receptionist)
   "createAt": "string",
   "updateAt": "string"
+}
+```
+
+Property Model
+
+Una vez el USUARIO se ha registrado, tiene acceso a agregar una propiedad.
+La colección Property, almacena datos generales de la propiedad. Esta colección se vincula con las colecciónes "room_type" y "rate_plan" respectivamente.
+Una propiedad puede tener uno o varios "room_type". Un "room_type" esta asociado a una sola propiedad. Por lo tanto su relación es One-to-Many.
+De la misma forma, una propiedad puede tener uno o varios "rate_plan" y cada "rate_plan" esta asociado a una sola propiedad. Por lo tanto su relación tambien es "One-to-many"
+
+La colección Property guarda un enlace al documento "User" del creador de la propiedad. De esa forma diferenciamos al USUARIO creador de los posibles USUARIOS a los que se le otorgen acceso a la misma.
+
+```
+{
+  "property_id": ObjectId(),
+  "property_name": "string",
+  "address": [{
+    "street": "string",
+    "city": "string",
+    "postal_code": "string",
+    "country_code": "string",
+  }],
+  "contact_info": {
+    "phone_number": "string",
+    "email": "string",
+  },
+  "room_type": ObjectId(),               # room_type_id
+  "rate_plan": ObjectId(),               # rate_plan_id
+
+  "createdBy": ObjectId(),               # user_id
+  "createdAt": "string",                 # timestamp
+  "updateAt": "string"                   # timestamp
 }
 ```
