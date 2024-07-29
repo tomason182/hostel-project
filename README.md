@@ -18,7 +18,7 @@ Tabla de contenidos
 
 ---
 
-User Model
+# User Model
 
 El primer paso que un USUARIO realiza en la aplicación es el registro.
 La colección "User" almacena los datos del registro del usuario.
@@ -44,7 +44,7 @@ Un USUARIO puede tener muchas PROPIEDADES y una PROPIEDAD varios USUARIOS.
 }
 ```
 
-Property Model
+# Property Model
 
 Una vez el USUARIO se ha registrado, tiene acceso a agregar una propiedad.
 La colección Property, almacena datos generales de la propiedad. Esta colección se vincula con las colecciónes "room_type" y "rate_plan" respectivamente.
@@ -77,7 +77,7 @@ La colección Property guarda un enlace al documento "User" del creador de la pr
 }
 ```
 
-Access Control Model
+# Access Control Model
 
 Permite al administrador (creador) de una propiedad, agregrar otros USUARIOS con diferentes roles.
 Esta colección se vincula con "User" y "Property"
@@ -99,7 +99,7 @@ Un access control tiene varios USUARIOS, un USUARIO podria tener varios access c
 }
 ```
 
-Room Type
+# Room Type
 
 Una vez creada la propiedad el usuario agrega los tipos de cuartos que su propiedad mantiene. Los tipos de cuartos se almacenan en la colección "Room Type". Los tipos de cuartos se vinculan exclusivamente con la propiedad.
 Una Propiedad puede tener varios tipos de cuartos y un tipo de cuarto una sola propiedad. Su relación es One-to-Many
@@ -119,7 +119,7 @@ Una Propiedad puede tener varios tipos de cuartos y un tipo de cuarto una sola p
 }
 ```
 
-Rate Plan
+# Rate Plan
 
 Conjunto de condicones que van a modificar el precio base de un tipo de cuarto.
 Se manejaran 4 tipos de planes de tarifa:
@@ -167,7 +167,7 @@ Se manejaran 4 tipos de planes de tarifa:
 (\*) Ejemplos: Con un nivel de ocupación superior al 80% el usuario pude establecer que la tarifa se incremente un 5% del precio standard. Por el contrario un nivel de ocupación del 20% la tarifa decrementa un 5%.
 (\*\*) Ejemplos: Un reserva individual $10 usd/noche, dos personas $18/noche, cuatro personas $15/noche.
 
-Product
+# Product
 
 La colección "Product" combina el tipo de cuarto y el plan de tarifas para crear, junto con algunas restricciones, un producto (habitación) único de la propiedad.
 
@@ -182,3 +182,28 @@ La colección "Product" combina el tipo de cuarto y el plan de tarifas para crea
   "custom_occupancy": "number",                     # La ocupación maxima viene establecida por "room_type", pero el usuario puede modificarla indivdualmente.
 }
 ```
+
+# Rate & Availability
+
+Hasta este momento el usuario: agrego los datos de su propiedad, creo tipos de cuartos y planes de tarifas y se generaron
+todos los cuartos (editables) que contiene la propiedad.
+En este momento es necesario establecer la disponibilidad y tarifa diaria de cada cuarto.
+Por lo tanto esta Colección esta vinculada directamente con cada cuarto (Product).
+La relación en este caso es One-to-One.
+De la colección "Product" obtenemos "custom_occupancy", lo que nos va a permitir determinar cuantas camas disponibles van quedando, (CUSTOM_OCCUPANCY - RESERVAS)
+
+{
+"rate_and_availability_id": "ObjectID()", # Id unica del documento
+"product_id": "Product[1]" # Vincula con la colección "Product"
+"availability": [
+{
+"date": "string",
+ "is_available": "boolean",
+"custom_rate": "number"
+ }
+],
+"Created_At": "string",  
+ "Updated_At": "string"  
+}
+
+De "rate_plan" obtenemos la tarifa base, pero esta puede ser modificada por el usuario para un dia o un rango de dias especifico en esta colección.
