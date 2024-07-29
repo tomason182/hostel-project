@@ -220,7 +220,7 @@ El modelo "Guest" esta abocado a los datos del pasajero que realiza la reserva, 
 
 ```
 {
-  "guess_id": "string",                   # Identificador del huesped
+  "guess_id": "ObjectId",                 # Identificador del huesped
   "first_name": "string",                 # Datos relacionados con el huesped...
   "last_name": "string",
   "email": "string",
@@ -247,9 +247,9 @@ El modelo "Guest" esta abocado a los datos del pasajero que realiza la reserva, 
 
 ```
 {
-  "reservation_id": "string",                   # Identificador unico de la reserva
-  "guess_id": "string",                         # Identificador unico del huesped
-  "room_id": "string",                          # Identificador unico de la habitación
+  "reservation_id": "ObjectId()",               # Identificador unico de la reserva
+  "guess_id": "Guess[1..*]",                    # Identificador unico del huesped
+  "product_id": "Product[1..*],                 # Identificador unico de la habitación
   "check_in_date": "string",                    # Fecha de ingreso formato ISO 8601
   "check_out_date": "string",                   # Fecha de egreso formato ISO 8601
   "number_of_guess": "number",                  # Numero total de huespedes
@@ -262,5 +262,3 @@ El modelo "Guest" esta abocado a los datos del pasajero que realiza la reserva, 
   "updateAt": "string"                          # Timestamp actualización de la reserva
 }
 ```
-
-## Reservation Model
