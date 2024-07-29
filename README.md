@@ -54,6 +54,9 @@ De la misma forma, una propiedad puede tener uno o varios "rate_plan" y cada "ra
 La colección Property guarda un enlace al documento "User" del creador de la propiedad. De esa forma diferenciamos al USUARIO creador de los posibles USUARIOS a los que se le otorgen acceso a la misma.
 
 ```
+# @ Collection Property
+# @ One-to-Many: Property > room_type
+# @ One-to-Many: Property > rate_plan
 {
   "property_id": ObjectId(),
   "property_name": "string",
@@ -73,5 +76,27 @@ La colección Property guarda un enlace al documento "User" del creador de la pr
   "createdBy": ObjectId(),               # user_id
   "createdAt": "string",                 # timestamp
   "updateAt": "string"                   # timestamp
+}
+```
+
+Access Control Model
+
+Permite al administrador (creador) de una propiedad, agregrar otros USUARIOS con diferentes roles.
+Esta colección se vincula con "User" y "Property"
+Una propiedad tiene un solo access control, y un access control una sola propiedad. Por lo tanto su relacion es One-to-One
+Un access control tiene varios USUARIOS, un USUARIO podria tener varios access control. Su relacion es One-to-Many.
+
+```
+# @ Coleccion Access_control
+# @ one-to-many User > Access_control
+# @ one-to-one Property > Access_control
+
+{
+  "access_id": ObjectId(),
+  "property_id": ObjectId(),                    # Id de la propiedad
+  "user_id": ObjectId(),
+  "role": "string",                           # rol que se le asigna al usuario
+  "createAt": "string",
+  "updateAt": "string"
 }
 ```
