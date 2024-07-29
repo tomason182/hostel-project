@@ -209,3 +209,58 @@ De la colección "Product" obtenemos "custom_occupancy", lo que nos va a permiti
 ```
 
 De "rate_plan" obtenemos la tarifa base, pero esta puede ser modificada por el usuario para un dia o un rango de dias especifico en esta colección.
+
+## Guest Model y Reservation Model
+
+Los últimos dos modelos "Guest" y "Reservation" estan vinculados con los pasajero que llegan al hostel. Estos datos pueden provenir tanto de la propia app (cuando el USUARIO carga una nueva reserva) como de API's externas como Booking.com, HostelWorld, o la propia pagina del hospedaje.
+
+El modelo "Guest" esta abocado a los datos del pasajero que realiza la reserva, mientras que el modelo "Reservation" mantiene información relacionada con la reserva en sí.
+
+### Guest
+
+```
+{
+  "guess_id": "string",                   # Identificador del huesped
+  "first_name": "string",                 # Datos relacionados con el huesped...
+  "last_name": "string",
+  "email": "string",
+  "phone_number": "string",
+  "address": {
+    "street": "string",
+    "city": "string",
+    "country": "string",
+    "postal_code": "string"
+  },
+  "gender": "string",
+  "nationality": "string",
+  "passport_number": "string",
+  "loyalty_program": {                      # Programa de lealtad. No es útil ahora pero se lo puede tener en cuenta
+    "membership_number": "string",          # para el futuro, donde el viajero va sumando puntos si utiliza la pagina para
+    "points": "number",                     # reservar y asi optiene descuentos, promociones, etc
+  },
+  "created_At": "string",
+  "updated_At": "string"
+}
+```
+
+### Reservation
+
+```
+{
+  "reservation_id": "string",                   # Identificador unico de la reserva
+  "guess_id": "string",                         # Identificador unico del huesped
+  "room_id": "string",                          # Identificador unico de la habitación
+  "check_in_date": "string",                    # Fecha de ingreso formato ISO 8601
+  "check_out_date": "string",                   # Fecha de egreso formato ISO 8601
+  "number_of_guess": "number",                  # Numero total de huespedes
+  "total_price": "number",                      # Importe total a pagar
+  "currency": "string",                         # Moneda del importe total (ej., USD, EUR, ARS)
+  "reservation_status": "string",               # Estado de la reserva (ej., confirmada, cancelada, etc)
+  "payment_status": "string",                   # Estado del pago (ej. pagado, pendiente, etc)
+  "special_request": "string",                  # Requisitos especiales o notas
+  "createAt": "string",                         # Timestamp creación de la reserva
+  "updateAt": "string"                          # Timestamp actualización de la reserva
+}
+```
+
+## Reservation Model
