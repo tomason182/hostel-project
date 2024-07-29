@@ -70,8 +70,6 @@ La colección Property guarda un enlace al documento "User" del creador de la pr
     "phone_number": "string",
     "email": "string",
   },
-  "room_type": ObjectId(),               # room_type_id
-  "rate_plan": ObjectId(),               # rate_plan_id
 
   "createdBy": ObjectId(),               # user_id
   "createdAt": "string",                 # timestamp
