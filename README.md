@@ -105,6 +105,9 @@ Una vez creada la propiedad el usuario agrega los tipos de cuartos que su propie
 Una Propiedad puede tener varios tipos de cuartos y un tipo de cuarto una sola propiedad. Su relación es One-to-Many
 
 ```
+# @ Collection Room-Type
+# @ One-to-Many: Property > Room-Type
+
 {
   "room_type_id": ObjectId(),             # Unique Id
   "property_id": ObjectId(),              # Id unico de la propiedad
@@ -115,3 +118,51 @@ Una Propiedad puede tener varios tipos de cuartos y un tipo de cuarto una sola p
   "inventory": "number"                   # Cantidad de cuartos del mismo tipo
 }
 ```
+
+Rate Plan
+
+Conjunto de condicones que van a modificar el precio base de un tipo de cuarto.
+Se manejaran 4 tipos de planes de tarifa:
+
+- Standard pricing (por defecto)
+- Derived pricing: Permite modificar el precio en base al porcentaje de ocupación del hospedaje. El usuario establece usuario establece el nivel de ocupación del hostel a partir del cual se reduce o aumenta la tarifa un porcentaje especifico (\*).
+  -Occupancy-based pricing (OBP): Permite modificar el precio en base a la cantidad de pasajeros en una reserva. Útil para camas en cuarto compartido o cantidad de habitaciones privadas completas alquiladas en una misma reserva (\*\*).
+- Length of stay pricing (LOS): Modifica el precio en base a la duración de la estadia.
+
+```
+{
+  "rate_plan_id": ObjectId(),
+  "property_id": ObjectId(),
+  "plan_type": "enum",                            # Standard, LOS, OBP, etc
+  "plan_name": "string",
+  "conditions: {                                  # Condiciones especificas del plan
+    "derived": {
+      "occupancy_threshold: "number",             # Nivel de ocupación del hostel
+      "price_adjustment": "number"                # Porcentaje de ajuste del precio
+    },
+    "obp": {
+      "passanger_threshold": "number"             # Cantidad de pasajero en una reserva
+      "price_adjustment": "number"
+    },
+    "los": {
+      "min_stay_length": "number",
+      "price_adjustment": "number"
+    },
+    "breakfast": {
+      "isIncluded": "boolean",
+      "price_adjustment": "number"
+    }
+  }
+  "base_rate": "number",
+  "currency": "string"
+  "valid_from": "string"                          # Fecha inicio del plan (Vigencia)
+  "valid_to": "string"                            # Fecha fin del plan
+  "day_of_week": ["string"]                       # Dias de semana en los que aplica
+  "exception": ["string"]                         # Fechas excluidas del plan
+  "createAt": "string"
+  "updateAt": "string"
+}
+```
+
+(\*) Ejemplos: Con un nivel de ocupación superior al 80% el usuario pude establecer que la tarifa se incremente un 5% del precio standard. Por el contrario un nivel de ocupación del 20% la tarifa decrementa un 5%.
+(\*\*) Ejemplos: Un reserva individual $10 usd/noche, dos personas $18/noche, cuatro personas $15/noche.
