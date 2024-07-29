@@ -22,7 +22,7 @@
 # Este modelo se puede crear por defecto, pero puede ser editable por el usuario.
 
 {
-  "product_id": "room001",
+  "product_id": "product001",
   "property_id": "60c72b5a9b1d8e3f4f8f85c78",
   "room_type": "room_type_003",
   "rate_plan": ["ratePlan001", "ratePlan002", "ratePlan003"],

@@ -1,35 +1,76 @@
 ### Rate & availability ###
 
-# Dos modelos de ejemplo de como podria estructurarce la colección de tarifas y disponibilidad
-# El primer ejemplo contempla tener una sección de "tarifas especiales" y un "tarifa base" como valor madre.
-# En el segundo ejemplo incorporo la tarifa en cada uno de los items de la disponibilidad.
 
-# ** Nota: Me acabo de dar cuenta que esto modelos no contemplan la cantidad de camas **
-# ** Hay que diferenciar cuartos privados de compartidos ? como lo manejamos ?        **
-# ** Cuartos privados se cierra disponibilidad cuando el cuarto se reserva            **
-# ** Cuarto compartido se cierra disponibilidad cuando todas las camas se reservan    **
+## MODELO PRINCIPAL ###
+
+# Hasta este momento el usuario: agrego los datos de su propiedad, creo tipos de cuartos y planes de tarifas y se generaron
+# todos los cuartos (editables) que contiene la propiedad.
+# En este momento es necesario establecer la disponibilidad y tarifa diaria de cada cuarto.
+# Por lo tanto esta Colección esta vinculada directamente con cada cuarto (Product).
+# La relación en este caso es One-to-One.
+# De la colección "Product" obtenemos "custom_occupancy", lo que nos va a permitir determinar cuantas camas disponibles van quedando,
+# y cuando el cuarto se ha reservado por completo (CUSTOM_OCCUPANCY - RESERVAS PARA EL CUARTO)
+
+{
+  "rate_and_availability_id": "ObjectID()",               # Id unica del documento. Se crea un documento unico por cuarto.
+  "product_id": "string",                                 # Vincula la colección con la colección "Product"
+  "currency": "string",                
+  "availability": [ 
+    {
+      "date": "string",                
+      "is_available": "boolean",
+      "rate": "number"                  
+    }
+  ],
+  "Created_At": "string",                
+  "Updated_At": "string"                 
+}
+
+## Ejemplo de la creación de un documento ##
+
+{
+  "rate_and_availability_id": "rate_availability_001",
+  "product_id": "product101",                    
+  "currency": "USD",                   
+  "availability": [ 
+    { "date": "2024-07-26", "is_available": "true", "rate": 10 },
+    { "date": "2024-07-27", "is_available": "true", "rate": 10 },
+    { "date": "2024-07-28", "is_available": "true", "rate": 10 },
+    { "date": "2024-07-29", "is_available": "true", "rate": 10 },
+    { "date": "2024-07-30", "is_available": "true", "rate": 10 },
+    { "date": "2024-07-31", "is_available": "true", "rate": 12 },
+    { "date": "2024-08-01", "is_available": "true", "rate": 12 },
+  ],
+  "Created_At": "2024-07-26T15:26:56",              
+  "Updated_At": "2024-07-26T15:26:56"               
+}
+
+
+
+### OTROS EJEMPLOS DEL MODELO ###
 
 
 ## Ejemplo 1 ##
 {
-  "room_id": "string",                    # Id del dormitorio / cuarto
-  "base_rate_per_night": "number",        # Tarifa base por noche 
-  "currency": "string",                   # Moneda de la tarifa (ej. USD, EUR, ARS)
+  "rate_and_availability_ID": "ObjectID()",
+  "room_id": "string",                          # Id del dormitorio / cuarto
+  "base_rate_per_night": "number",              # Tarifa base por noche 
+  "currency": "string",                         # Moneda de la tarifa (ej. USD, EUR, ARS)
   "availability": [ 
     {
-      "date": "string",                   # Fecha de disponibilidad ISO 8601 (e.g 2024-07-25T15:02:00)
-      "is_available": "boolean",          # Status de la disponibilidad para la fecha determinada
+      "date": "string",                         # Fecha de disponibilidad ISO 8601 (e.g 2024-07-25T15:02:00)
+      "is_available": "boolean",                # Status de la disponibilidad para la fecha determinada
     }
   ],
-  "special_rates": [                      # Tarifas especiales
+  "special_rates": [                            # Tarifas especiales
     {
-      "start_date": "string",             # Fecha de inicio de la tarifa
-      "end_date": "string",               # Fecha de final de la tarifa
-      "rate_per_night": "number",         # valor de la tarifa para la fecha en cuestion
+      "start_date": "string",                   # Fecha de inicio de la tarifa
+      "end_date": "string",                     # Fecha de final de la tarifa
+      "rate_per_night": "number",               # valor de la tarifa para la fecha en cuestion
     }
   ],
-  "Created_At": "string",                 # Timestamp creación del documento
-  "Updated_At": "string"                  # Timestamp actualización del documento 
+  "Created_At": "string",                       # Timestamp creación del documento
+  "Updated_At": "string"                        # Timestamp actualización del documento 
 }
 
 
@@ -69,6 +110,7 @@
 # Acá metemos la tarifa dentro del objeto disponibilidad
 
 {
+  "rate_and_availability_id": "ObjectID()", 
   "room_id": "string", 
   "currency": "string",                
   "availability": [ 

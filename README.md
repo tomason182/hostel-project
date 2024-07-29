@@ -1,14 +1,24 @@
 # hostel-project
 
 Diseño inicial de la estructura de la base de datos.
-Es IMPORTANTE seguir el orden detallado debajo al momento de leer los archivos, para entender mejor la estructura
 
-1. User Model: Almacena cada uno de los usuarios que se registran en la app
-2. Property Model: El usuario registrado crea una propiedad.
-3. Access_control Model (Ver dentro de User): El usuario crea otros usuarios con distintos roles
-4. Room_types: Tipos de cuarto. Se vincula con Property.
-5. Rate_plan: Planes de tarifas.
-6. Products: Crea productos vendibles. Room Types + Rate Plans. Define políticas.
-7. rate_and_availiability: Almacena las tarifas y disponibilidad (Hay que corregir)
-8. Guest: Almacena los pasajeros
-9. reservation: Destinada a los datos referidos a la reservas
+El siguiente documento tiene como objetivo determinar la estructura y funcionamiento basico del CRM para hostels.
+
+Tabla de contenidos
+
+1. User Model
+2. Property Model
+3. Access_control Model
+4. Room_types
+5. Rate_plan
+6. Products
+7. rate_and_availability
+8. Guest
+9. reservation
+
+---
+
+User Model
+
+El primer paso que un USUARIO realiza en la aplicación es el registro. La colección "User" almacena los datos del registro del usuario.
+Una vez el USUARIO se ha registrado puede crear propiedades y otros USUARIOS para que gestionen su propiedad. Esta ultimá caracteristica se logra a traves del modelo "Access Control"
