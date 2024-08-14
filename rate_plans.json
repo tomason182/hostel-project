@@ -1,0 +1,50 @@
+[
+  {
+    "rate_plan_id": "ObjectId(123)",
+    "property_id": "ObjectId(ABC)",
+    "plan_type": "derived",
+    "plan_name": "plan de tarifa standard",
+    "conditions": {
+      "derived": {
+        "occupancy_threshold": 1,
+        "price_adjustment": 0
+      },
+      "obp": {
+        "passenger_threshold": 1,
+        "price_adjustment": 0
+      },
+      "los": {
+        "min_stay_length": 1,
+        "price_adjustment": 0
+      },
+      "created_At": "2024-08-13",
+      "update_At": "2024-08-13"
+    }
+  },
+  {
+    "rate_plan_id": "ObjectId(456)",
+    "property_id": "ObjectId(ABC)",
+    "plan_type": "los",
+    "plan_name": "tarifa especial cantidad de dias",
+    "conditions": {
+      "derived": {
+        "occupancy_threshold": 1,
+        "price_adjustment": 0
+      },
+      "obp": {
+        "passenger_threshold": 1,
+        "price_adjustment": 0
+      },
+      "los": {
+        "min_stay_length": 7,
+        "price_adjustment": 0.15
+      },
+      "breakfast": {
+        "isIncluded": true,
+        "price_adjustment": 0
+      },
+      "created_At": "2024-08-13",
+      "updated_At": "2024-08-13"
+    }
+  }
+]

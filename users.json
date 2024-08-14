@@ -1,0 +1,9 @@
+{
+  "_id": "ObjectId(123)",
+  "username": "simon@email.com",
+  "first_name": "Simon",
+  "last_name": "Simon",
+  "hashed_password": "abc123def456ghi789",
+  "createdAt": "2024-08-10T13:38:47.838+00:00",
+  "updatedAt": "2024-08-10T13:38:47.838+00:00"
+}

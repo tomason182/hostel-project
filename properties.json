@@ -1,0 +1,26 @@
+{
+  "_id": "ObjectId()",
+  "property_name": "Pero, Que Hostel!",
+  "address": {
+    "street": "De las Calles 123",
+    "city": "La Ciudad",
+    "postal_code": "7250",
+    "country_code": "AR"
+  },
+  "contact_info": {
+    "phone_number": "+5592281554433",
+    "email": "peroquehoste@email.com"
+  },
+  "access_control": [
+    {
+      "user_id": "ObjectId(123)",
+      "role": "admin"
+    },
+    {
+      "user_id": "ObjectId(234)",
+      "role": "employee"
+    }
+  ],
+  "createdAt": "2024-08-10T14:38:47.838+00:00",
+  "updatedAt": "2024-08-10T14:38:47.838+00:00"
+}

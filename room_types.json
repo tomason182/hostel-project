@@ -1,0 +1,32 @@
+{
+  "_id": "ObjectId(QQQ)",
+  "property_id": "ObjectId(ABC)",
+  "description": "Cuarto compartido mixto de 6 camas",
+  "type": "compartido",
+  "bathroom": "compartido",
+  "max_occupancy": 6,
+  "inventory": 3,
+  "base_rate": 12,
+  "currency": "USD",
+  "breakfast": {
+    "isIncluded": true,
+    "price": 0
+  },
+  "products": [
+    {
+      "room_name": "cuarto Azul",
+      "custom_occupancy": 4
+    },
+    {
+      "room_name": "cuarto Rojo",
+      "custom_occupancy": 6
+    },
+    {
+      "room_name": "Cuarto Amarillo",
+      "custom_occupancy": 6
+    }
+  ],
+  "rate_plans": ["ObjectId(123)", "ObjectId(456)"],
+  "created_At": "2024-08-13",
+  "updated_At": "2024-08-13"
+}
