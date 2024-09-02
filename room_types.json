@@ -14,16 +14,37 @@
   },
   "products": [
     {
-      "room_name": "cuarto Azul",
-      "custom_occupancy": 4
+      "room_name": "Room01",
+      "beds": [
+        "ObjectId(001)",
+        "ObjectId(002)",
+        "ObjectId(003)",
+        "ObjectId(004)",
+        "ObjectId(005)",
+        "ObjectId(006)"
+      ]
     },
     {
-      "room_name": "cuarto Rojo",
-      "custom_occupancy": 6
+      "room_name": "Room02",
+      "beds": [
+        "ObjectId(007)",
+        "ObjectId(008)",
+        "ObjectId(009)",
+        "ObjectId(010)",
+        "ObjectId(011)",
+        "ObjectId(012)"
+      ]
     },
     {
-      "room_name": "Cuarto Amarillo",
-      "custom_occupancy": 6
+      "room_name": "Room03",
+      "beds": [
+        "ObjectId(013)",
+        "ObjectId(014)",
+        "ObjectId(015)",
+        "ObjectId(016)",
+        "ObjectId(017)",
+        "ObjectId(018)"
+      ]
     }
   ],
   "rate_plans": ["ObjectId(123)", "ObjectId(456)"],

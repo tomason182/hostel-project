@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "ObjectId(001)",
+    "availability": [
+      {
+        "reserved_By": "ObjectId(APX)",
+        "start-date": "2024-08-19",
+        "end-date": "2024-08-21"
+      },
+
+      {
+        "reserved_By": "ObjectId(APZ)",
+        "start-date": "2024-08-19",
+        "end-date": "2024-08-28"
+      }
+    ]
+  },
+  {
+    "_id": "ObjectId(002)",
+    "availability": []
+  },
+  {
+    "_id": "ObjectId(002)",
+    "availability": []
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "guest_id": "ObjectId(AAA)",
+  "property_id": "ObjectId(123)",
+  "first_name": "Sandra",
+  "last_name": "Sandraletti",
+  "contact_info": {
+    "email": "sandrasalandretti@mail.com",
+    "phone_number": "+5492215589554"
+  },
+  "address": {
+    "street": "calle 123",
+    "city": "algun lugar",
+    "country_code": "AR",
+    "postal_code": "7894"
+  },
+  "genre": "female",
+  "passport_number": "35081603",
+  "created_At": "",
+  "update_At": ""
+}
